@@ -7,7 +7,8 @@ WORKDIR /fastAPI_study
 
 # Install python lib
 COPY requirements.txt ./requirements.txt
-RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt --no-cache-dir
 
 # Copy files
 COPY ./main.py /fastAPI_study/
