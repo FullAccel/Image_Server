@@ -8,8 +8,4 @@
   });
 </script>
 
-{#await promise}
-  <p>...waiting</p>
-{:then message}
-  <h1>{message}</h1>
-{/await}
+
