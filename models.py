@@ -3,11 +3,12 @@ from sqlalchemy.orm import relationship
 
 from database import Base
 
-class HomeworkSubmission(Base):
+class HomeworkImage(Base):
     __tablename__ = "homework_submission"
 
     id = Column(Integer, primary_key=True)
     image = Column()
+    homeworkId = Column()
 
 class Answer(Base):
     __tablename__ = "answer"
