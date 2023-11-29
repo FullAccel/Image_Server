@@ -1,13 +1,8 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-print(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn
 import logging
 from domain import homeworkImage_router
-import os
 
 tags_metadata = [
     {

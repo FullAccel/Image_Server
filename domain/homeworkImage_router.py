@@ -1,8 +1,6 @@
-from fastapi import APIRouter, Query
-
+from fastapi import APIRouter
 from fastapi import File, UploadFile
 from domain import image_api, textDecting
-from typing import Annotated, Union
 
 router = APIRouter(
     prefix="/homework/images",
