@@ -1,1 +1,3 @@
 test/
+domain/config/aws_s3_key.py
+.env

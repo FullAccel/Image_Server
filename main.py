@@ -1,14 +1,18 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile
 from starlette.middleware.cors import CORSMiddleware
-from PIL import Image
-from io import BytesIO
-from typing import List
 import uvicorn
 import logging
-from pydantic import BaseModel
+from domain import homeworkImage_router
 
-app = FastAPI()
+tags_metadata = [
+    {
+        "name": "submit_homework",
+        "description": "'https://chaeda-s3.s3.ap-northeast-2.amazonaws.com/images/origin_1_1_0.webp' 에서 1_1_0은 {userId} _ {homeworkId} _ {사진Index}"
+    }
+]
 
+app = FastAPI(openapi_tags=tags_metadata)
+app.include_router(homeworkImage_router.router)
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
 
@@ -23,40 +27,6 @@ async def log_requests(request, call_next):
     logging.info(f"Sent response: {response.status_code}")
     return response
 
-
-@app.get("/hello")
-def hello():
-    return {"message": "Hello SeJun World"}
-
-
-class ImageInfo(BaseModel):
-    page: int
-    image: UploadFile
-
-
-@app.post("/homework/images/{user_id}/{homework_id}")
-async def submit_homework(
-        user_id: int,
-        homework_id: int,
-        images: list[UploadFile] = File(...)
-):
-    results = []
-    for image in images:
-        file_name = image.filename
-        file_size = len(image.file.read())
-
-        # 여기에서 이미지 처리 로직을 추가할 수 있습니다.
-        # 예를 들어, 이미지를 저장하거나 다른 처리를 수행할 수 있습니다.
-
-        results.append({
-            "file_name": file_name,
-            "file_size": f"{file_size} byte",
-            "status": "success"
-        })
-
-    return {"results": results}
-
-
 origins = [
     "http://127.0.0.1:5173",
     "http://127.0.0.1:3000",
@@ -64,7 +34,6 @@ origins = [
     "http://localhost:5173",
     # 또는 "http://localhost:5173"
 ]
-
 
 app.add_middleware(
     CORSMiddleware,
