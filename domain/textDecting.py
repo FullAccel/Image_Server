@@ -195,7 +195,7 @@ def store_to_webp(user_id, homework_id, index, images, homework_img):
     cv2.imwrite(f'./images/{filename}', homework_img, [int(cv2.IMWRITE_WEBP_QUALITY), 100])
     s3_upload.upload_file(filename)
     saved_paths.append(f'{os.getenv("S3_URL")}/images/{filename}')
-
+    os.remove(f'./images/{filename}')
     # 각 직사각형에 대해 이미지를 자르고 저장합니다.
     for i, image in enumerate(images):
         filename = f'problem_{user_id}_{homework_id}_{index}_{i + 1}.webp'
