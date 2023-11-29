@@ -3,7 +3,7 @@
 FROM python:3.9.18
 
 # Set working directory
-WORKDIR /fastAPI_study
+WORKDIR /ChaeDa_server
 
 # Install python lib
 COPY requirements.txt ./requirements.txt
