@@ -16,6 +16,7 @@ RUN apt-get -y install libgl1-mesa-glx
 # Copy files
 COPY ./main.py /ChaeDa_server/
 COPY ./models.py /ChaeDa_server/
+COPY ./.env /ChaeDa_server/
 COPY ./domain /ChaeDa_server/domain
 COPY ./domain /ChaeDa_server/images
 
