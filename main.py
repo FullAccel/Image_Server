@@ -1,3 +1,5 @@
+import sys
+sys.path.append('..')
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn
@@ -45,7 +47,6 @@ app.add_middleware(
 )
 
 if __name__ == "__main__":
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     # TODO 로컬 배포
     # uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
     # TODO 실서버 배포
