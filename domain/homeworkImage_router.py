@@ -35,7 +35,7 @@ async def submit_homework(
             problem_rectangles = textDecting.getContours(dilate_problem, problem)
             problem_group_rectangles = textDecting.groupRectangle(problem, problem_rectangles)
             num_and_answers_img = textDecting.find_num_and_answer(problem, problem_group_rectangles)
-            textDecting.tesseract_ocr(num_and_answers_img)
+            # textDecting.tesseract_ocr(num_and_answers_img)
 
         # 예를 들어, 이미지를 저장하거나 다른 처리를 수행할 수 있습니다.
         results = s3_saved_paths
