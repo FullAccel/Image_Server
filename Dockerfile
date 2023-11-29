@@ -11,6 +11,6 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
 # Copy files
-COPY ./main.py /fastAPI_study/
+COPY ./main.py /ChaeDa_server/
 
 CMD ["python", "main.py", "--host", "0.0.0.0", "--port", "8088"]
