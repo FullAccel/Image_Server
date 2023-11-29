@@ -170,9 +170,12 @@ def divideRectangleImage(img, rectangles):
 
     # Crop and save individual images for each rectangle
     for i, (x, y, w, h) in enumerate(rectangles):
+        if i > 6:
+            raise IndexError("사진 분할은 6장이상 될 수 없습니다.")
         cropped_img = img[y:y + h, x:x + w]
         titles.append(f'rectangle_{i + 1}')
         images.append(cropped_img)
+
 
     # Display the images
     # image_api.plt_imshow(titles, images)

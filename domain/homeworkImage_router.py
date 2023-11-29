@@ -24,7 +24,10 @@ async def submit_homework(
         dilate_img = textDecting.dilate(track_text_img)
         rectangles = textDecting.getContours(dilate_img, homework_img)
         group_rectangles = textDecting.groupRectangle(homework_img, rectangles)
-        problem_imgs = textDecting.divideRectangleImage(homework_img, group_rectangles)
+        try:
+            problem_imgs = textDecting.divideRectangleImage(homework_img, group_rectangles)
+        except IndexError as e:
+            return f'사진이 6장 이상으로 분할 되었습니다. => {e}'
         s3_saved_paths = textDecting.store_to_webp(user_id, homework_id, i, problem_imgs, homework_img)
 
 
