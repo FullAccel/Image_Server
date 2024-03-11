@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi import File, UploadFile
 from domain import image_api, textDecting
+from domain.request_controller import send_s3_url
 
 router = APIRouter(
     prefix="/homework/images",
@@ -29,7 +30,7 @@ async def submit_homework(
         except IndexError as e:
             return f'사진이 6장 이상으로 분할 되었습니다. => {e}'
         s3_saved_paths = textDecting.store_to_webp(user_id, homework_id, i, problem_imgs, homework_img)
-
+        send_s3_url.send_url(user_id, homework_id, s3_saved_paths)
 
         for problem in problem_imgs:
             problem = textDecting.make_edge(problem)
@@ -38,7 +39,7 @@ async def submit_homework(
             problem_rectangles = textDecting.getContours(dilate_problem, problem)
             problem_group_rectangles = textDecting.groupRectangle(problem, problem_rectangles)
             num_and_answers_img = textDecting.find_num_and_answer(problem, problem_group_rectangles)
-            # textDecting.tesseract_ocr(num_and_answers_img)
+            textDecting.tesseract_ocr(num_and_answers_img)
 
         # 예를 들어, 이미지를 저장하거나 다른 처리를 수행할 수 있습니다.
         results = s3_saved_paths

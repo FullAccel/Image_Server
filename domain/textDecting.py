@@ -25,7 +25,7 @@ def track_text(img):
 
     image_list_title = ['gray', 'gaussianBlur', 'adaptiveThreshold', 'edged']
     image_list = [gray, gaussianBlur, adaptiveThreshold, edged]
-    # image_api.plt_imshow(image_list_title, image_list)
+    image_api.plt_imshow(image_list_title, image_list)
 
     return edged
 
@@ -47,7 +47,7 @@ def dilate(img):
 
     titles.append('dilate')
     images.append(dilate)
-    # image_api.plt_imshow(titles,images)
+    image_api.plt_imshow(titles,images)
 
     return dilate
 
@@ -116,7 +116,7 @@ def getContours(img, origin_img):
     for (x, y, w, h) in rectangles:
         cv2.rectangle(copy_origin_img, (x, y), (x + w, y + h), (36, 255, 12), 3)
 
-    # image_api.plt_imshow('img', copy_origin_img)
+    image_api.plt_imshow('img', copy_origin_img)
     return rectangles
 
 
@@ -178,7 +178,7 @@ def divideRectangleImage(img, rectangles):
 
 
     # Display the images
-    # image_api.plt_imshow(titles, images)
+    image_api.plt_imshow(titles, images)
 
     return images
 
